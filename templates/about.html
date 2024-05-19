@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Page Content -->
+    <div class="page-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            {% if request.session.language == '1' %}
+            <h1>Biz Haqimizda</h1>
+            <span>Biz haqimizda ishonchli malumotlar</span>
+            {% else %}
+            <h1>О нас</h1>
+            <span>НАДЕЖНАЯ ИНФОРМАЦИЯ О НАС</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="more-info about-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="more-info-content">
+              <div class="row">
+                {% for detail in about_company %}
+                <div class="col-md-6 align-self-center">
+                  <div class="right-content">
+                    {% if request.session.language == '1' %}
+                    <span>BIZ KIMMIZ</span>
+                    <h2>Kompaniyamiz haqida <em>bilib oling</em></h2>
+                    {% else %}
+                    <span>КТО МЫ</span>
+                    <h2>Узнайте о нашей <em>компании</em></h2>
+                    {% endif %}
+                    <p>{{ detail.text }}</p>
+                    <a href="" class="filled-button">Read More</a>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="left-image">
+                    {% if detail.image.url %}
+                    <img src="{{ detail.image.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'assets/images/about-image.jpg' %}" alt="">
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              {% if request.session.language == '1' %}
+              <h2>Bizning jamoamiz <em>a'zolari</em></h2>
+              <span>Yuqori darajadagi malakali hodimlar</span>
+              {% else %}
+              <h2>Члены нашей <em>команды</em></h2>
+              <span>ВЫСОКОКВАЛИФИ ЦИРОВАННЫЕ СОТРУДНИКИ</span>
+              {% endif %}
+            </div>
+          </div>
+          {% for worker in workers %}
+          <div class="col-md-4">
+            <div class="team-item">
+              {% if worker.image.url %}
+              <img src="{{ worker.image.url }}" alt="">
+              {% else %}
+              <img src="{% static 'assets/images/team_01.jpg' %}" alt="">
+              {% endif %}
+              <div class="down-content">
+                <h4>{{ worker.name }}</h4>
+                <span>{{ worker.position }}</span>
+                <p>{{ worker.description }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+
+    <div class="testimonials">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              {% if request.session.language == '1' %}
+              <h2>Biz haqimizda <em>nima deyishadi</em></h2>
+              <span>BIZNING ENG KATTA MIJOZLARIMIZNING GUVOHLIKLARI</span>
+              {% else %}
+              <h2>Что говорят о <em>нас</em></h2>
+              <span>НАШИ КРУПНЕЙШИЕ КЛИЕНТЫ ПОДТВЕРЖДАЮТ</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="owl-testimonials owl-carousel">
+              {% for customer_opinion in customer_opinions %}
+              <div class="testimonial-item">
+                <div class="inner-content">
+                  <h4>{{ customer_opinion.name }}</h4>
+                  <span>{{ customer_opinion.position }}</span>
+                  <p>{{ customer_opinion.description }}</p>
+                </div>
+                <img src="http://placehold.it/60x60" alt="">
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

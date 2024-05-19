@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Page Content -->
+    <div class="page-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            {% if request.session.language == '1' %}
+            <h1>Bizning Xizmatlar</h1>
+            <span>KO'P YILLIK TAJRIBAMIZ BOR</span>
+            {% else %}
+            <h1>Наши сервисы</h1>
+            <span>У НАС МНОГОЛЕТНИЙ ОПЫТ</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="single-services">
+      <div class="container">
+        <div class="row" id="tabs">
+          <div class="col-md-4">
+            <ul>
+              {% for service_type in service_types %}
+              <li><a href='#tabs-{{ forloop.counter }}'>{{ service_type.title }}<i class="fa fa-angle-right"></i></a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col-md-8">
+            <section class='tabs-content'>
+              {% for service_type in service_types %}
+              <article id='tabs-{{ forloop.counter }}'>
+                <img src="{{ service_type.image.url }}" alt="">
+                <h4>{{ service_type.title }}</h4>
+                <p>{{ service_type.text }}</p>
+              </article>
+              {% endfor %}
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
